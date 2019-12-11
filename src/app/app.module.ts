@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { AirComponent } from './features/air/air.component';
+import { RightsGuard } from './guards/rights.guard';
 
 
 @NgModule({
@@ -15,7 +16,9 @@ import { AirComponent } from './features/air/air.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    RightsGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

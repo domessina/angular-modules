@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes, NoPreloading, PreloadAllModules } from '@angular/router';
+import { RouterModule, Routes, NoPreloading } from '@angular/router';
 import { AirComponent } from '@app/features/air/air.component';
+import { RightsGuard } from '@app/guards/rights.guard';
 
 const routes: Routes = [
   {
@@ -10,7 +11,9 @@ const routes: Routes = [
   },
   {
     path: 'ground',
-    loadChildren: './features/ground/ground.module#GroundModule'
+    loadChildren: './features/ground/ground.module#GroundModule',
+    canActivate: [RightsGuard],
+    data: {rights: ['ADMINISTRATOR']}
   },
   {
     path: '**',
@@ -21,7 +24,7 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes,
     {
-      preloadingStrategy: PreloadAllModules,
+      preloadingStrategy: NoPreloading,
       enableTracing: true
     })],
   exports: [RouterModule]
